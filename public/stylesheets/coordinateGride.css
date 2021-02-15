@@ -1,0 +1,24 @@
+#canvas {
+    display: block;
+    margin: 2em auto;
+}
+#coordinate {
+    display: none; opacity: 0;
+    font-size: 12px; line-height: 25px;
+    width: 75px;
+    height: 25px;
+    position: absolute; z-index: 1;
+    top: 0;
+    left: 0;
+    text-align: center;
+    color: #0f9d5880;
+    background-color: #111;
+    border-radius: 2px;
+}
+
+#coordinate.show {
+    display: block; opacity: 1;
+}
+#canvas:hover{
+    cursor: crosshair;
+}

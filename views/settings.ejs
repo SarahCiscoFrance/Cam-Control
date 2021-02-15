@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/button.css' />
+    <link rel='stylesheet' href='/stylesheets/camera.css' />
+    <link rel='stylesheet' href='/stylesheets/coordinateGride.css' />
+    <link rel='stylesheet' href='/stylesheets/metrics.css' />
+    <script src="https://kit.fontawesome.com/63191989e5.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            line-height: 1.71429;
+        }
+
+        section {
+            margin-bottom: 5%;
+        }
+
+        p,
+        li {
+            color: #c3c3c3;
+        }
+
+        input[type=text] {
+            border: none;
+            border-bottom: 1px solid #293649;
+        }
+    </style>
+</head>
+
+<body>
+    <%if (!firstSetting){%>
+    <a href="/"
+        style="position: absolute;left: 10px;top: 10px;background: none ;border: none;font-size: 2rem;margin: 0%; text-decoration: none"><i
+            class="fas fa-arrow-circle-left"></i> Back</i></a>
+    <h1>Settings page</h1>
+    <%} else {%>
+    <h1>Welcome</h1>
+    <%}%> 
+    <div class="card" style="padding: 1%; border-radius: 30px">
+        <section>
+            <h2><%= (!firstSetting)? "Change ClientID, Client Secret etc." : "Please fill in the following fields" %>
+    </h2>
+    <p></p>
+    <form action="/changeIntegration" method="POST"
+        style="display: flex; flex-direction: column; border: 2px solid; border-radius: 30px; padding: 2%; color: black; background-color: white">
+        <label for="clientId">Client Id :</label>
+        <input type="text" id="clientId" name="clientId" required>
+
+        <label for="clientSecret">Client Secret :</label>
+        <input type="text" id="clientSecret" name="clientSecret" required>
+
+        <label for="redirectUri">Redirect URI :</label>
+        <input type="text" id="redirectUri" name="redirectUri" required>
+
+        <label for="OAuthUrl">OAuth Authorization URL :</label>
+        <input type="text" id="OAuthUrl" name="OAuthUrl" required>
+        <div>
+            <input class="little-button" style="margin: 1%" type="submit" value="Change!">
+        </div>
+        <h3><b>Be sure of the values you put in the form before submitting it </b><i
+                style="-webkit-text-fill-color: #ffeb3b;-webkit-text-stroke-color: #000000;-webkit-text-stroke-width: 1.00px; font-size: 1.5rem"
+                class="fas fa-exclamation-triangle"></i></h3>
+    </form>
+    <%if (!firstSetting){%>
+    <p>If you want to refresh access token go to <a class="text-link" href="/connect">link</a></p>
+    <%}%>
+        </section>
+
+        <section>
+            <h2>How to get a ClientID, Client Secret & OAuth Authorization URL ?</h2>
+            <p>First be sure to have a Webex account with the right level of access. Go to <a class="text-link"
+                    style=" white-space:nowrap; " href="https://admin.webex.com/users">link</a> and check if your user
+                have the roles <b>User and device administrator</b> in the "Roles of the functional administrator"
+                section.</p>
+            <h3>Registering your Integration</h3>
+            <p>Registering an integration with Webex is super easy. Go to <a class="text-link" style=" white-space:nowrap; "
+                    href="https://developer.webex.com/docs/integrations ">link</a>, if you're logged in, select My Webex
+                Apps from the menu under your avatar at the top of this page, click "Create a New App" then "Create an
+                Integration" to start the wizard.
+                You'll need to provide some basic information like your integration's name, description, and
+                logo.<br><br></p>
+            <ul>
+                <li>In the <b>Scopes</b> section be sure to select: <b>spark:xapi_statuses; spark:xapi_commands;
+                        spark-admin:devices_read</b>.<br> </li>
+                <li> And for <b>Redirect URI(s)</b> use <em>http://YOUR_DOMAINE:PORT/ </em> (be sure to replace
+                    <em>YOUR_DOMAINE</em> & <em>PORT</em> with the right values).</li>
+            </ul>
+
+
+            <br><p>This information should be user-facing since that's what they'll see in the permission dialog.
+            After successful registration you'll be taken to a different screen containing your integration's newly
+            created <em>Client ID</em>, <em>Client Secret</em> and <em>OAuth Authorization URL</em>. <br>The Client
+            Secret will only be shown once so please copy and keep it safe!<br><br>Well now you have all you need to
+            fill the form !</p>
+
+        </section>
+    </div>
+
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+
+</script>
+
+</html>
