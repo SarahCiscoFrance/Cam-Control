@@ -7,10 +7,24 @@
     border-radius: 30px;
 }
 
+.camera-little-item {
+    overflow: hidden;
+    width: 20rem;
+    max-width: 95%;
+    margin: 1rem;
+    border-radius: 30px;
+}
+
 @media screen and (min-width: 200px) and (max-width: 640px) {
     .camera-item {
         overflow: hidden;
-        /* swidth: 100%; */
+        max-width: 100%;
+        margin: 1rem;
+        border-radius: 30px;
+    }
+
+    .camera-littel-item {
+        overflow: hidden;
         max-width: 100%;
         margin: 1rem;
         border-radius: 30px;

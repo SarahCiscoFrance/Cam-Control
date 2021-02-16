@@ -16,8 +16,9 @@
 
 <body>
   <div>
-      <p style="position: absolute;left: 10px;top: 10px;background: none ;border: none;font-size: 2rem;margin: 0%">Cam Controller <i class="fas fa-eye"></i></p>
-      <a href="/settings" style="
+    <p style="position: absolute;left: 10px;top: 10px;background: none ;border: none;font-size: 2rem;margin: 0%">Cam
+      Controller <i class="fas fa-eye"></i></p>
+    <a href="/settings" style="
       position: absolute;
       right: 10px;
       top: 10px;
@@ -29,26 +30,27 @@
     PAGE</a>
   <div class="card card__actions" style="border-radius: 30px; margin: 1rem;">
     <p><b>Device Information: </b></p>
-    
-      <!-- https://sts.sci.uwo.ca/img/cisco/webex-board.png -->
-      <%if (devices != undefined && devices.length > 0) {%>
-      <% for (let device of devices) { %>
-        <% if(codecId == device.id) {%>
-          <% if(device.product.includes("Room")) {%>
-          <img style="width: 50%"src="https://images.ctfassets.net/osq47g2esuw5/1MyBDbnUJ9DlMGPVR84kQY/bad4c892c377ccc345d9a2ed9f38cfa4/thumbnail_devices_room_kit_bars.png?w=500">
-          <%}else if (device.product.includes("Board")){ %>
-          <img style="width: 50%"src="https://sts.sci.uwo.ca/img/cisco/webex-board.png">
-          <%} else {%>
-            <img style="width: 50%"src="https://www.webex.com/content/dam/wbx/global/images/devices_3.png">
-          <%}%>
+
+    <!-- https://sts.sci.uwo.ca/img/cisco/webex-board.png -->
+    <%if (devices != undefined && devices.length > 0) {%>
+    <% for (let device of devices) { %>
+    <% if(codecId == device.id) {%>
+    <% if(device.product.includes("Room")) {%>
+    <img style="width: 50%"
+      src="https://images.ctfassets.net/osq47g2esuw5/1MyBDbnUJ9DlMGPVR84kQY/bad4c892c377ccc345d9a2ed9f38cfa4/thumbnail_devices_room_kit_bars.png?w=500">
+    <%}else if (device.product.includes("Board")){ %>
+    <img style="width: 50%" src="https://sts.sci.uwo.ca/img/cisco/webex-board.png">
+    <%} else {%>
+    <img style="width: 50%" src="https://www.webex.com/content/dam/wbx/global/images/devices_3.png">
+    <%}%>
           <p style="margin-top: 0%"><%= device.displayName%></p>
-        <%}}%>
-        <% if(deviceStatus == "OK") {%>
-        <p>Status: Active <i style="color: #44e444" class="fas fa-circle"></i></p>
-        <% }else{ %>
-          <p>Status: Unactive <i style="color: red" class="fas fa-circle"></i></p>
-        <% } %>
-        <% } %>
+    <%}}%>
+    <% if(deviceStatus == "OK") {%>
+    <p>Status: Active <i style="color: #44e444" class="fas fa-circle"></i></p>
+    <% }else{ %>
+    <p>Status: Unactive <i style="color: red" class="fas fa-circle"></i></p>
+    <% } %>
+    <% } %>
 
     <form style="display: flex;flex-direction: column;" action="/setCodecId" method="post">
       <div>
@@ -75,7 +77,7 @@
 
 
   <button class="little-button" id="change"><i class="fas fa-exchange-alt"></i></button>
-  <article id="controller-container" class="card camera-item">
+  <article id="controller-container" class="card camera-little-item">
     <header class="card__header">
       <div class="card__content">
         <h2 class="camera__price" style="color: white">CONTROLLER</h2>
@@ -100,7 +102,7 @@
       border: 10px solid #4d4d4d;
       height: 284px;
       width: 88%;
-      margin: 5%; display: none;">
+      margin: 5%;">
 
       <div class="card__actions"><button id="up" class="button-up" data-ip=""><i
             class="fas fa-angle-double-up"></i></button></div>
@@ -117,25 +119,25 @@
     <!-- ------------------------------------------ -->
     <div>
       <span id="coordinate"></span>
-      <canvas id="canvas" width="412" height="284"></canvas>
+      <canvas style=" display: none;" id="canvas" width="412" height="284"></canvas>
     </div>
 
     <div style="text-align: center; font-weight: bold"><label>zoom</label></div>
     <div class="card__actions" style="padding-top: 0%">
       <button id="min" class="plus-minus-button"
         style="font-size:1rem; margin-right: 10%; font-weight: bold; color: #00AB50" data-ip="">MIN</button>
-      <button id="zoom" class="plus-minus-button" style="display: none"><i class="far fa-plus-square"></i></button>
-      <button id="dezoom" class="plus-minus-button" style="display: none"><i class="far fa-minus-square"></i></button>
+      <button id="dezoom" class="plus-minus-button"><i class="far fa-minus-square"></i></button>
+      <button id="zoom" class="plus-minus-button"><i class="far fa-plus-square"></i></button>
       <input id="slider" style="direction: rtl; background: linear-gradient(to right, #82CFD0 0%, #82CFD0 70%, #fff 50%, #fff 100%);
       border: solid 1px #82CFD0;
       border-radius: 8px;
       height: 7px;
       outline: none;
       transition: background 450ms ease-in;
-      -webkit-appearance: none;" type="range" min="0" max="11800" step="1" onchange="showVal(this.value)"
+      -webkit-appearance: none; display: none" type="range" min="0" max="11800" step="1" onchange="showVal(this.value)"
         value="11800">
-      <button id="max" class="plus-minus-button" style="font-size:1rem; margin-left: 10%; font-weight: bold; color: #F7644A"
-        data-ip="">MAX</button>
+      <button id="max" class="plus-minus-button"
+        style="font-size:1rem; margin-left: 10%; font-weight: bold; color: #F7644A" data-ip="">MAX</button>
     </div>
     <div style="display: flex;
     flex-direction: column;
@@ -171,53 +173,55 @@
   <table>
     <caption>Last update at <b id="currentTime"></b> the <b id="currentDate"></b></caption>
     <thead>
-     <tr>
-      <td colspan="1"><a id="refresh-data" style="text-decoration: none; color: white" href="#"><i class="fas fa-redo"></i> Refresh Data</a></td>
-      <th scope="col">Data category</th>
-      <th scope="col">Unit</th>
-     </tr>
+      <tr>
+        <td colspan="1"><a id="refresh-data" style="text-decoration: none; color: white" href="#"><i
+              class="fas fa-redo"></i> Refresh Data</a></td>
+        <th scope="col">Data category</th>
+        <th scope="col">Unit</th>
+      </tr>
     </thead>
     <tbody>
-     <tr>
-      <% if(metrics.roomAnalytics != undefined){%>
-      <th style="background: #293649; color: white; text-align: center" rowspan="4" scope="rowgroup">Codec</th>
-      <% if (metrics.roomAnalytics != undefined && metrics.roomAnalytics.PeoplePresence != undefined){ %>
-      <th scope="row">Occupied</th>
-      <td id="tdPeoplePresence"><%= metrics.roomAnalytics.PeoplePresence %></td>
-      <% } %>
-     </tr>
-     <tr>
-        <% if (metrics.roomAnalytics != undefined && metrics.roomAnalytics.PeopleCount != undefined){ %>
-      <th scope="row">Occupants</th>
-      <td id="tdPeopleCount"><%= metrics.roomAnalytics.PeopleCount.Current == -1 ? 0 : metrics.roomAnalytics.PeopleCount.Current %></td>
-      <% } %>
-     </tr>
-     <tr>
-      <% if (metrics.roomAnalytics != undefined && metrics.roomAnalytics.Sound != undefined){ %>
-      <th scope="row">Sound Level (dBA)</th>
-      <td id="tdSound"><%= metrics.roomAnalytics.Sound.Level.A %></td>
-      <% } %>
-     </tr>
-     <tr>
-      <% if (metrics.roomAnalytics != undefined && metrics.roomAnalytics.AmbientNoise != undefined){ %>
-      <th scope="row">Ambient Noise (dBA)</th>
-      <td id="tdAmbientNoise"><%= metrics.roomAnalytics.AmbientNoise.Level.A %></td>
-    </tr>
-      
-      <% } } else {%>
+      <tr>
+        <% if(metrics.roomAnalytics != undefined){%>
         <th style="background: #293649; color: white; text-align: center" rowspan="4" scope="rowgroup">Codec</th>
+        <% if (metrics.roomAnalytics != undefined && metrics.roomAnalytics.PeoplePresence != undefined){ %>
         <th scope="row">Occupied</th>
-        <td id="tdPeoplePresence">NO DATA</td>
-       </tr>
-       <tr>   
+        <td id="tdPeoplePresence"><%= metrics.roomAnalytics.PeoplePresence %></td>
+        <% } %>
+      </tr>
+      <tr>
+        <% if (metrics.roomAnalytics != undefined && metrics.roomAnalytics.PeopleCount != undefined){ %>
+        <th scope="row">Occupants</th>
+        <td id="tdPeopleCount">
+          <%= metrics.roomAnalytics.PeopleCount.Current == -1 ? 0 : metrics.roomAnalytics.PeopleCount.Current %></td>
+        <% } %>
+      </tr>
+      <tr>
+        <% if (metrics.roomAnalytics != undefined && metrics.roomAnalytics.Sound != undefined){ %>
+        <th scope="row">Sound Level (dBA)</th>
+        <td id="tdSound"><%= metrics.roomAnalytics.Sound.Level.A %></td>
+        <% } %>
+      </tr>
+      <tr>
+        <% if (metrics.roomAnalytics != undefined && metrics.roomAnalytics.AmbientNoise != undefined){ %>
+        <th scope="row">Ambient Noise (dBA)</th>
+        <td id="tdAmbientNoise"><%= metrics.roomAnalytics.AmbientNoise.Level.A %></td>
+      </tr>
+
+      <% } } else {%>
+      <th style="background: #293649; color: white; text-align: center" rowspan="4" scope="rowgroup">Codec</th>
+      <th scope="row">Occupied</th>
+      <td id="tdPeoplePresence">NO DATA</td>
+      </tr>
+      <tr>
         <th scope="row">Occupants</th>
         <td id="tdPeopleCount">NO DATA</td>
-       </tr>
-       <tr>
+      </tr>
+      <tr>
         <th scope="row">Sound Level (dBA)</th>
         <td id="tdSound">NO DATA</td>
-       </tr>
-       <tr>
+      </tr>
+      <tr>
         <th scope="row">Ambient Noise (dBA)</th>
         <td id="tdAmbientNoise">NO DATA</td>
       </tr>
@@ -230,40 +234,40 @@
       <th style="background: #293649; color: white; text-align: center" rowspan="3" scope="rowgroup">Room Navigator</th>
       <th scope="row">Temperature (°C/°F)</th>
       <td id="tdAmbientTemperature<%=cpt%>"><%=peripheral.RoomAnalytics.AmbientTemperature%></td>
-     </tr>
-     <tr>
-      <th scope="row">Relative Humidity (%)</th>
-      <td id="tdRelativeHumidity<%=cpt%>"><%=peripheral.RoomAnalytics.RelativeHumidity%></td>
-     </tr>
-
-     <% if (peripheral.RoomAnalytics.AirQuality != undefined && peripheral.RoomAnalytics.AirQuality.Index != undefined){ %>
-      <tr>
-      <th scope="row">AirQuality (Index)</th>
-      <td id="tdAirQuality<%=cpt%>"><%= peripheral.RoomAnalytics.AirQuality.Index %></td>
       </tr>
-     <% } %>
-     <% cpt++; %>
-     <%} }%>
+      <tr>
+        <th scope="row">Relative Humidity (%)</th>
+        <td id="tdRelativeHumidity<%=cpt%>"><%=peripheral.RoomAnalytics.RelativeHumidity%></td>
+      </tr>
+
+      <% if (peripheral.RoomAnalytics.AirQuality != undefined && peripheral.RoomAnalytics.AirQuality.Index != undefined){ %>
+      <tr>
+        <th scope="row">AirQuality (Index)</th>
+        <td id="tdAirQuality<%=cpt%>"><%= peripheral.RoomAnalytics.AirQuality.Index %></td>
+      </tr>
+      <% } %>
+      <% cpt++; %>
+      <%} }%>
     </tbody>
   </table>
 
   <div class="card camera-item" style="padding: 2%">
-      <div class="card-header">
-        <h2>Codec's Metrics</h2>
-      </div>
-      <div class="card-body">
-        <div class="metric-group">
-          <div>
-            <div id="PeoplePresenceContainer" class="metric">
-              <% if (metrics.roomAnalytics != undefined && metrics.roomAnalytics.PeoplePresence != undefined){ %>
-              <span class="icon "></span>
-              <div id="PeoplePresence" class="metric-value"><span><%= metrics.roomAnalytics.PeoplePresence %></span></div>
-              <div class="metric-description"><span class="text-nowrap">Occupied</span>
+    <div class="card-header">
+      <h2>Codec's Metrics</h2>
+    </div>
+    <div class="card-body">
+      <div class="metric-group">
+        <div>
+          <div id="PeoplePresenceContainer" class="metric">
+            <% if (metrics.roomAnalytics != undefined && metrics.roomAnalytics.PeoplePresence != undefined){ %>
+            <span class="icon "></span>
+            <div id="PeoplePresence" class="metric-value"><span><%= metrics.roomAnalytics.PeoplePresence %></span></div>
+            <div class="metric-description"><span class="text-nowrap">Occupied</span>
               <%} else {%>
-                <span class="icon icon-error_20 icon-error"></span>
-                <div id="PeoplePresence" class="metric-value metric-status-error"><span>-</span></div>
-                <div class="metric-description"><span class="text-nowrap">Occupied</span>
-              <%}%>
+              <span class="icon icon-error_20 icon-error"></span>
+              <div id="PeoplePresence" class="metric-value metric-status-error"><span>-</span></div>
+              <div class="metric-description"><span class="text-nowrap">Occupied</span>
+                <%}%>
                 <div></div>
               </div>
             </div>
@@ -271,14 +275,16 @@
           <div>
             <div id="PeopleCountContainer" class="metric">
               <% if (metrics.roomAnalytics != undefined && metrics.roomAnalytics.PeopleCount != undefined){ %>
-              <span class="icon "></span>
-              <div id="PeopleCount" class="metric-value"><span><%= metrics.roomAnalytics.PeopleCount.Current == -1 ? 0 : metrics.roomAnalytics.PeopleCount.Current %></span></div>
-              <div class="metric-description"><span class="text-nowrap">Occupants</span>
-              <%} else {%>
-                <span class="icon icon-error_20 icon-error"></span>
-                <div id="PeopleCount" class="metric-value metric-status-error"><span>-</span></div>
+                <span class="icon "></span>
+                <div id="PeopleCount" class="metric-value">
+                  <span><%= metrics.roomAnalytics.PeopleCount.Current == -1 ? 0 : metrics.roomAnalytics.PeopleCount.Current %></span>
+                </div>
                 <div class="metric-description"><span class="text-nowrap">Occupants</span>
-              <%}%>
+                  <%} else {%>
+                  <span class="icon icon-error_20 icon-error"></span>
+                  <div id="PeopleCount" class="metric-value metric-status-error"><span>-</span></div>
+                  <div class="metric-description"><span class="text-nowrap">Occupants</span>
+                    <%}%>
                 <div></div>
               </div>
             </div>
@@ -286,13 +292,13 @@
           <div>
             <div id="SoundContainer" class="metric">
               <% if (metrics.roomAnalytics != undefined && metrics.roomAnalytics.Sound != undefined){ %>
-              <div id="Sound" class="metric-value"><span><%= metrics.roomAnalytics.Sound.Level.A %></span></div>
-              <div class="metric-description"><span class="text-nowrap">Sound Level (dBA)</span>
-              <%} else {%>
-                <span class="icon icon-error_20 icon-error"></span>
-                <div id="Sound" class="metric-value metric-status-error"><span>-</span></div>
-                <div class="metric-description"><span class="text-nowrap">Sound Level (dBA)</span>
-              <%}%>
+                    <div id="Sound" class="metric-value"><span><%= metrics.roomAnalytics.Sound.Level.A %></span></div>
+                    <div class="metric-description"><span class="text-nowrap">Sound Level (dBA)</span>
+                      <%} else {%>
+                      <span class="icon icon-error_20 icon-error"></span>
+                      <div id="Sound" class="metric-value metric-status-error"><span>-</span></div>
+                      <div class="metric-description"><span class="text-nowrap">Sound Level (dBA)</span>
+                        <%}%>
                 <div></div>
               </div>
             </div>
@@ -303,14 +309,15 @@
           <div>
             <div id="AmbientNoiseContainer" class="metric">
               <% if (metrics.roomAnalytics != undefined && metrics.roomAnalytics.AmbientNoise != undefined){ %>
-              <span class="icon icon-check-circle_20 icon-excellent"></span>
-              <div id="AmbientNoise" class="metric-value metric-status-excellent"><span><%= metrics.roomAnalytics.AmbientNoise.Level.A %></span></div>
-              <div class="metric-description"><span class="text-nowrap">Ambient Noise</span>
-                <%} else {%>
-                  <span class="icon icon-error_20 icon-error"></span>
-                  <div id="AmbientNoise" class="metric-value metric-status-error"><span>-</span></div>
-                  <div class="metric-description"><span class="text-nowrap">Ambient Noise</span>
-                <%}%>
+                        <span class="icon icon-check-circle_20 icon-excellent"></span>
+                        <div id="AmbientNoise" class="metric-value metric-status-excellent">
+                          <span><%= metrics.roomAnalytics.AmbientNoise.Level.A %></span></div>
+                        <div class="metric-description"><span class="text-nowrap">Ambient Noise</span>
+                          <%} else {%>
+                          <span class="icon icon-error_20 icon-error"></span>
+                          <div id="AmbientNoise" class="metric-value metric-status-error"><span>-</span></div>
+                          <div class="metric-description"><span class="text-nowrap">Ambient Noise</span>
+                            <%}%>
                 <div>(dBA)</div>
               </div>
             </div>
@@ -344,6 +351,20 @@
 <script src="/javascripts/coordinateGride.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+
+/*Disabling the context menu on long taps on Android*/
+  window.oncontextmenu = function(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      return false;
+  };
+
+/* Check Device Type (touch or mouse) */
+  var isTouchSupported = "ontouchend" in document; //boolean
+  var myDown = isTouchSupported ? "touchstart" : "mousedown";
+  var myUp = isTouchSupported ? "touchend" : "mouseup";
+
+
   /*Initialize Date & Time Label*/
   $("#currentTime").text(new Date().toLocaleTimeString())
   $("#currentDate").text(new Date().toLocaleDateString())
@@ -468,7 +489,7 @@
     }
   });
 
-  $("button[id^='zoom']").mousedown(function () {
+  $("button[id^='zoom']").bind(myDown, function () {
     //var speed = $("#speed").val();
     console.log("zoom in");
     $.ajax({
@@ -481,7 +502,7 @@
     });
   });
 
-  $("button[id^='zoom']").mouseup(function () {
+  $("button[id^='zoom']").bind(myUp, function () {
     //var speed = $("#speed").val();
     console.log("stop zoom in");
     $.ajax({
@@ -496,7 +517,7 @@
 
 
 
-  $("button[id^='dezoom']").mousedown(function () {
+  $("button[id^='dezoom']").bind(myDown, function () {
     //var speed = $("#speed").val();
     console.log("zoom out");
     $.ajax({
@@ -509,7 +530,7 @@
     });
   });
 
-  $("button[id^='dezoom']").mouseup(function () {
+  $("button[id^='dezoom']").bind(myUp, function () {
     //var speed = $("#speed").val();
     console.log("stop zoom out");
     $.ajax({
@@ -540,7 +561,7 @@
   });
 
 
-  $("button[id^='right']").mousedown(function () {
+  $("button[id^='right']").bind(myDown, function () {
     var speed = $("#speed").val();
     console.log("right");
     $.ajax({
@@ -553,7 +574,7 @@
     });
   });
 
-  $("button[id^='right']").mouseup(function () {
+  $("button[id^='right']").bind(myUp, function () {
     //var speed = $("#speed").val();
     console.log("stop right");
     $.ajax({
@@ -574,7 +595,7 @@
 
 
 
-  $("button[id^='left']").mousedown(function () {
+  $("button[id^='left']").bind(myDown, function () {
     var speed = $("#speed").val();
     console.log("left");
     $.ajax({
@@ -587,7 +608,7 @@
     });
   });
 
-  $("button[id^='left']").mouseup(function () {
+  $("button[id^='left']").bind(myUp, function () {
     //var speed = $("#speed").val();
     console.log("stop left");
     $.ajax({
@@ -606,7 +627,7 @@
 
 
 
-  $("button[id^='up']").mousedown(function () {
+  $("button[id^='up']").bind(myDown, function () {
     var speed = $("#speed").val();
     console.log("up");
     $.ajax({
@@ -619,7 +640,7 @@
     });
   });
 
-  $("button[id^='up']").mouseup(function () {
+  $("button[id^='up']").bind(myUp, function () {
     //var speed = $("#speed").val();
     console.log("stop up");
     $.ajax({
@@ -634,7 +655,7 @@
 
 
 
-  $("button[id^='down']").mousedown(function () {
+  $("button[id^='down']").bind(myDown, function () {
     var speed = $("#speed").val();
     console.log("down");
     $.ajax({
@@ -647,7 +668,7 @@
     });
   });
 
-  $("button[id^='down']").mouseup(function () {
+  $("button[id^='down']").bind(myUp, function () {
     //var speed = $("#speed").val();
     console.log("stop up");
     $.ajax({
@@ -659,20 +680,6 @@
       }
     });
   });
-
-
-  // $("button[id^='down']").click(function () {
-  //   var speed = $("#speed").val();
-  //   console.log("down");
-  //   $.ajax({
-  //     url: '/down/' + speed,
-  //     type: 'get',
-  //     success: 'success',
-  //     error: function (request, status, error) {
-  //       alert(request.responseText);
-  //     }
-  //   });
-  // });
 
   $('#callWebexNumber button').click(function (e) {
     if ($(this).attr("value") == "startCallWebex" && $("#webexNumber").val().length !== 0) {
