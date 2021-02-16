@@ -4,7 +4,6 @@ var router = express.Router();
 
 
 // GLOBAL VARIABLE
-var bool = true;
 var token = ""; // access token
 var codecId = "";
 var devices = [];
@@ -12,23 +11,15 @@ var deviceStatus = "OK";
 var roomAnalytics = [];
 
 // INTEGRATION GLOBAL VARIABLE
-var authorizationURL = 'https://webexapis.com/v1/authorize?client_id=Ca6f1861ab4030becca437282fcf1bc999b0ddbadc05180ab9a84fd3e342b85c2&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3002%2F&scope=spark%3Akms%20spark-admin%3Adevices_read%20spark%3Axapi_statuses%20spark%3Axapi_commands&state=1234';
-var clientID = 'Ca6f1861ab4030becca437282fcf1bc999b0ddbadc05180ab9a84fd3e342b85c2';
-var clientSecret = '55ae2789057a279b26f7032707a407ec736444602494a19bc398dbd9aa97a01c';
-var redirectUri = 'http://localhost:3002/';
+var authorizationURL = '';
+var clientID = '';
+var clientSecret = '';
+var redirectUri = '';
 var integrationIsSet = false;
 
 /* GET home page. */
 router.get('/', async function (req, res, next) {
   const code = req.query.code;
-  // if( ){
-
-  // }
-  // else if (bool) {
-  //   bool = false;
-  //   res.redirect('/connect');
-  //} 
-  // else {
   if (code != undefined) {
     console.log("getting token...")
     getToken(async function (returnedToken) {
@@ -38,14 +29,7 @@ router.get('/', async function (req, res, next) {
           integrationIsSet = true;
           getRoomAnalytics(token, codecId).then((data) => {
             roomAnalytics = data;
-            res.redirect('/')
-            // res.render('index', {
-            //   title: 'Controller',
-            //   codecId: d[0].id,
-            //   devices: d,
-            //   metrics: data,
-            //   deviceStatus: deviceStatus
-            // });
+            res.redirect('/');
           })
         });
         setInterval(() => {
@@ -70,7 +54,6 @@ router.get('/', async function (req, res, next) {
       deviceStatus: deviceStatus
     });
   }
-  // }
 });
 
 

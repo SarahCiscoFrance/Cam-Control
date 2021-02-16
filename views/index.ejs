@@ -104,16 +104,16 @@
       width: 88%;
       margin: 5%;">
 
-      <div class="card__actions"><button id="up" class="button-up" data-ip=""><i
-            class="fas fa-angle-double-up"></i></button></div>
+      <div class="card__actions"><button id="up" class="button-up notSelectable" ><i
+            class="fas fa-angle-double-up notSelectable"></i></button></div>
 
 
       <div class="card__actions left-right-box">
-        <button id="left" class="button-left" data-ip=""><i class="fas fa-angle-double-left"></i></button>
-        <button id="button-center" class="plus-minus-button" data-ip=""><i class="far fa-dot-circle"></i></button>
-        <button id="right" class="button-right" data-ip=""><i class="fas fa-angle-double-right"></i></button>
+        <button id="left" class="button-left notSelectable" ><i class="fas fa-angle-double-left notSelectable"></i></button>
+        <button id="button-center" class="plus-minus-button notSelectable" ><i class="far fa-dot-circle notSelectable"></i></button>
+        <button id="right" class="button-right notSelectable" ><i class="fas fa-angle-double-right notSelectable"></i></button>
       </div>
-      <div class="card__actions"><button id="down" class="button-down" data-ip=""><i
+      <div class="card__actions"><button id="down" class="button-down notSelectable" ><i
             class="fas fa-angle-double-down"></i></button></div>
     </div>
     <!-- ------------------------------------------ -->
@@ -124,8 +124,8 @@
 
     <div style="text-align: center; font-weight: bold"><label>zoom</label></div>
     <div class="card__actions" style="padding-top: 0%">
-      <button id="min" class="plus-minus-button"
-        style="font-size:1rem; margin-right: 10%; font-weight: bold; color: #00AB50" data-ip="">MIN</button>
+      <button id="min" class="plus-minus-button notSelectable"
+        style="font-size:1rem; margin-right: 10%; font-weight: bold; color: #00AB50" >MIN</button>
       <button id="dezoom" class="plus-minus-button"><i class="far fa-minus-square"></i></button>
       <button id="zoom" class="plus-minus-button"><i class="far fa-plus-square"></i></button>
       <input id="slider" style="direction: rtl; background: linear-gradient(to right, #82CFD0 0%, #82CFD0 70%, #fff 50%, #fff 100%);
@@ -136,8 +136,8 @@
       transition: background 450ms ease-in;
       -webkit-appearance: none; display: none" type="range" min="0" max="11800" step="1" onchange="showVal(this.value)"
         value="11800">
-      <button id="max" class="plus-minus-button"
-        style="font-size:1rem; margin-left: 10%; font-weight: bold; color: #F7644A" data-ip="">MAX</button>
+      <button id="max" class="plus-minus-button notSelectable"
+        style="font-size:1rem; margin-left: 10%; font-weight: bold; color: #F7644A" >MAX</button>
     </div>
     <div style="display: flex;
     flex-direction: column;
@@ -351,27 +351,6 @@
 <script src="/javascripts/coordinateGride.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-
-/*Disabling the context menu on long taps on Android*/
-  window.oncontextmenu = function(event) {
-      event.preventDefault();
-      event.stopPropagation();
-      return false;
-  };
-
-/* Check Device Type (touch or mouse) */
-  var isTouchSupported = "ontouchend" in document; //boolean
-  var myDown = isTouchSupported ? "touchstart" : "mousedown";
-  var myUp = isTouchSupported ? "touchend" : "mouseup";
-
-
-  /*Initialize Date & Time Label*/
-  $("#currentTime").text(new Date().toLocaleTimeString())
-  $("#currentDate").text(new Date().toLocaleDateString())
-
-
-
-
   function showVal(newVal) {
     console.log(newVal)
     $.ajax({
@@ -406,6 +385,31 @@
       }
     });
   }
+
+
+
+$(document).ready(function(){
+  /*Disabling the context menu on long taps on Android*/
+  window.oncontextmenu = function(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      return false;
+  };
+
+/* Check Device Type (touch or mouse) */
+  var isTouchSupported = "ontouchend" in document; //boolean
+  var myDown = isTouchSupported ? "touchstart" : "mousedown";
+  var myUp = isTouchSupported ? "touchend" : "mouseup";
+
+
+  /*Initialize Date & Time Label*/
+  $("#currentTime").text(new Date().toLocaleTimeString())
+  $("#currentDate").text(new Date().toLocaleDateString())
+
+
+  /* Disable text selection */
+  $('.notSelectable').disableSelection();
+
 
   $("#refresh-data").click(function(e){
     e.preventDefault()
@@ -692,6 +696,22 @@
       $(this).hide();
       $('#startCallWebex').show();
     }
+  });
+});
+
+
+  // This jQuery Plugin will disable text selection for Android and iOS devices.
+  $.fn.extend({
+      disableSelection: function() {
+          this.each(function() {
+              this.onselectstart = function() {
+                  return false;
+              };
+              this.unselectable = "on";
+              $(this).css('-moz-user-select', 'none');
+              $(this).css('-webkit-user-select', 'none');
+          });
+      }
   });
 </script>
 
