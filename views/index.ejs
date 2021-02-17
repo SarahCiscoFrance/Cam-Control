@@ -104,16 +104,19 @@
       width: 88%;
       margin: 5%;">
 
-      <div class="card__actions"><button id="up" class="button-up notSelectable" ><i
+      <div class="card__actions"><button id="up" class="button-up notSelectable"><i
             class="fas fa-angle-double-up notSelectable"></i></button></div>
 
 
       <div class="card__actions left-right-box">
-        <button id="left" class="button-left notSelectable" ><i class="fas fa-angle-double-left notSelectable"></i></button>
-        <button id="button-center" class="plus-minus-button notSelectable" ><i class="far fa-dot-circle notSelectable"></i></button>
-        <button id="right" class="button-right notSelectable" ><i class="fas fa-angle-double-right notSelectable"></i></button>
+        <button id="left" class="button-left notSelectable"><i
+            class="fas fa-angle-double-left notSelectable"></i></button>
+        <button id="button-center" class="plus-minus-button notSelectable"><i
+            class="far fa-dot-circle notSelectable"></i></button>
+        <button id="right" class="button-right notSelectable"><i
+            class="fas fa-angle-double-right notSelectable"></i></button>
       </div>
-      <div class="card__actions"><button id="down" class="button-down notSelectable" ><i
+      <div class="card__actions"><button id="down" class="button-down notSelectable"><i
             class="fas fa-angle-double-down"></i></button></div>
     </div>
     <!-- ------------------------------------------ -->
@@ -122,10 +125,10 @@
       <canvas style=" display: none;" id="canvas" width="412" height="284"></canvas>
     </div>
 
-    <div style="text-align: center; font-weight: bold"><label>zoom</label></div>
+    <div style="text-align: center; font-weight: bold"><label class="notSelectable">zoom</label></div>
     <div class="card__actions" style="padding-top: 0%">
       <button id="min" class="plus-minus-button notSelectable"
-        style="font-size:1rem; margin-right: 10%; font-weight: bold; color: #00AB50" >MIN</button>
+        style="font-size:1rem; margin-right: 10%; font-weight: bold; color: #00AB50">MIN</button>
       <button id="dezoom" class="plus-minus-button"><i class="far fa-minus-square"></i></button>
       <button id="zoom" class="plus-minus-button"><i class="far fa-plus-square"></i></button>
       <input id="slider" style="direction: rtl; background: linear-gradient(to right, #82CFD0 0%, #82CFD0 70%, #fff 50%, #fff 100%);
@@ -137,7 +140,7 @@
       -webkit-appearance: none; display: none" type="range" min="0" max="11800" step="1" onchange="showVal(this.value)"
         value="11800">
       <button id="max" class="plus-minus-button notSelectable"
-        style="font-size:1rem; margin-left: 10%; font-weight: bold; color: #F7644A" >MAX</button>
+        style="font-size:1rem; margin-left: 10%; font-weight: bold; color: #F7644A">MAX</button>
     </div>
     <div style="display: flex;
     flex-direction: column;
@@ -408,7 +411,7 @@ $(document).ready(function(){
 
 
   /* Disable text selection */
-  $('.notSelectable').disableSelection();
+  //$('.notSelectable').disableSelection();
 
 
   $("#refresh-data").click(function(e){
@@ -548,13 +551,6 @@ $(document).ready(function(){
   });
 
 
-
-
-
-
-
-
-
   $("button[id^='button-center']").click(function () {
     console.log('center');
     $.ajax({
@@ -590,11 +586,6 @@ $(document).ready(function(){
       }
     });
   });
-
-
-
-
-
 
 
 
@@ -684,6 +675,30 @@ $(document).ready(function(){
       }
     });
   });
+
+
+
+
+  $("button[id^='max']").click(function () {
+          console.log('max');
+        $.ajax({
+              url: '/zoomExtremum/In',
+              type: 'get',
+              success: 'success'
+        });
+  });
+
+  $("button[id^='min']").click(function () {
+          console.log('min');
+          $.ajax({
+              url: '/zoomExtremum/Out',
+              type: 'get',
+              success: 'success'
+          });
+    });
+
+
+
 
   $('#callWebexNumber button').click(function (e) {
     if ($(this).attr("value") == "startCallWebex" && $("#webexNumber").val().length !== 0) {

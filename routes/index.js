@@ -309,7 +309,6 @@ router.get('/center', async function (req, res, next) {
         "Zoom": 11800
       }
     })
-
   };
   request(options, function (error, response) {
     if (error) throw new Error(error);
@@ -381,7 +380,6 @@ router.get('/zoomForSlider/:strength', async function (req, res, next) {
           "Tilt": position.Tilt
         }
       })
-
     };
     request(options, function (error, response) {
       if (error) throw new Error(error);
@@ -390,6 +388,39 @@ router.get('/zoomForSlider/:strength', async function (req, res, next) {
     });
     res.send("ok")
   }
+});
+
+router.get('/zoomExtremum/:type', async function (req, res, next) {
+  const type = req.params.type;
+  if(type != "In" && type != "Out"){
+    res.send("Request invalid")
+  }
+  else{
+      var options = {
+        'method': 'POST',
+        'url': 'https://webexapis.com/v1/xapi/command/Camera.Ramp',
+        'headers': {
+          'Authorization': 'Bearer ' + token,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          "deviceId": codecId,
+          "arguments": {
+            "CameraId": 1,
+            "Zoom": type,
+            "ZoomSpeed": 15
+          }
+        })
+    
+      };
+      request(options, function (error, response) {
+        if (error) throw new Error(error);
+        console.log(response.body)
+        console.log(JSON.parse(response.body).deviceId);
+      });
+      res.send("ok")
+  }
+
 });
 
 
