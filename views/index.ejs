@@ -9,24 +9,19 @@
   <link rel='stylesheet' href='/stylesheets/camera.css' />
   <link rel='stylesheet' href='/stylesheets/coordinateGride.css' />
   <link rel='stylesheet' href='/stylesheets/metrics.css' />
+  <link rel='stylesheet' href='/stylesheets/animation.css' />
   <script src="https://kit.fontawesome.com/63191989e5.js" crossorigin="anonymous"></script>
 
   <link rel="stylesheet" href="/stylesheets/rSlider.min.css">
 </head>
 
 <body>
-  <div>
-    <p style="position: absolute;left: 10px;top: 10px;background: none ;border: none;font-size: 2rem;margin: 0%">Cam
-      Controller <i class="fas fa-eye"></i></p>
-    <a href="/settings" style="
-      position: absolute;
-      right: 10px;
-      top: 10px;
-      background: none;
-      border: none;
-      font-size: 2rem;"><i class="fas fa-cog"></i></a>
+  <div id="top-container">
+    <p>Cam Controller <i class="fas fa-eye"></i></p>
+    <a href="/settings"><i class="fas fa-cog nut-icon"></i></a>
+    <div id=color-bar></div>
   </div>
-  <a style="text-decoration: none; padding: 1%;" href="/"><i class="fas fa-redo"></i> RELOAD
+  <a style="text-decoration: none; padding: 1%;" href="/" onclick="LoadData();"><i class="fas fa-redo"></i> RELOAD
     PAGE</a>
   <div class="card card__actions" style="border-radius: 30px; margin: 1rem;">
     <p><b>Device Information: </b></p>
@@ -67,7 +62,7 @@
         </select>
       </div>
       <div>
-        <input class="btn" type="submit" value="Change!">
+        <input onclick="LoadData();" class="btn" type="submit" value="Change!">
       </div>
     </form>
   </div>
@@ -349,7 +344,9 @@
 
 
 
-
+  <footer>
+    <p>© 2021 Cisco. All rights reserved.</p>
+  </footer>
 </body>
 <script src="/javascripts/coordinateGride.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -390,6 +387,13 @@
   }
 
 
+  function LoadData(){
+    var animation  = 'gradient 1s ease infinite';
+    $('#color-bar').css('animation', animation).hide().show(0); 
+    $('#color-bar').animate({
+      height: '20%'
+    });
+}
 
 $(document).ready(function(){
   /*Disabling the context menu on long taps on Android*/
@@ -408,7 +412,6 @@ $(document).ready(function(){
   /*Initialize Date & Time Label*/
   $("#currentTime").text(new Date().toLocaleTimeString())
   $("#currentDate").text(new Date().toLocaleDateString())
-
 
   /* Disable text selection */
   //$('.notSelectable').disableSelection();

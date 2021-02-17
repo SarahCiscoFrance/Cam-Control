@@ -11,6 +11,38 @@ body {
   background-attachment: fixed;
 }
 
+
+#top-container {
+  position: absolute;
+  width: 100%;
+  top: 0px;
+  display: flex;
+  justify-content: space-between;
+  background: #293649;
+  height: 6%;
+  color: white;
+  font-size: 2rem;
+}
+
+#top-container > p {
+  position: relative;
+  left: 10px;
+  top: 10px;
+  background: none;
+  border: none;
+
+  margin: 0%;
+}
+
+#top-container > a {
+  position: relative;
+  right: 10px;
+  top: 10px;
+  background: none;
+  color: white;
+  border: none;
+}
+
 @media screen and (min-width: 200px) and (max-width: 640px) {
   body {
     padding: 0%;
@@ -30,6 +62,10 @@ body {
     user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome and Opera */
   }
+
+  #top-container {
+    font-size: 1.5rem;
+  }
 }
 
 a {
@@ -43,6 +79,15 @@ a {
 h1{
 color: white;
   font-size: 2.0rem;
+}
+
+footer {
+  margin-top: 5%;
+}
+
+#webexNumber, #codecId{
+  border-radius: 30px;
+  height: 25px;
 }
 
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');

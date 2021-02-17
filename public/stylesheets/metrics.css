@@ -35,7 +35,6 @@
     font-size: 1.25rem;
     margin-bottom: 0.5rem;
     border: 2px solid #00A0D1;
-    /* color: #292929; */
     color: white;
 }
 
@@ -94,4 +93,15 @@
 .icon-error_20::before {
     font-family: "Font Awesome 5 Free";
     content: "\f057";
+}
+
+@media screen and (min-width: 200px) and (max-width: 640px) {
+
+    .metric-group {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        flex-grow: 1;
+        white-space: pre-line;
+    }
 }
