@@ -3,11 +3,26 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var mongoose = require('mongoose');
+var session = require('express-session');
+
+const MongoStore = require('connect-mongo').default;
+
+mongoose.connect('mongodb://localhost:27017/test');
+
+var db = mongoose.connection;
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
+app.use(session({
+  secret: 'work hard',
+  resave: true,
+  saveUninitialized: false,
+  store: MongoStore.create({ mongoUrl: 'mongodb://localhost:27017/test' })
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

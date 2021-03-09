@@ -1,5 +1,6 @@
 var express = require('express');
 var request = require('request');
+var User = require('../models/user');
 var router = express.Router();
 
 
@@ -17,43 +18,106 @@ var clientSecret = '';
 var redirectUri = '';
 var integrationIsSet = false;
 
-/* GET home page. */
-router.get('/', async function (req, res, next) {
-  const code = req.query.code;
-  if (code != undefined) {
-    console.log("getting token...")
-    getToken(async function (returnedToken) {
-        getDevice(token).then((d) => {
-          devices = d;
-          codecId = d[0].id;
-          integrationIsSet = true;
-          getRoomAnalytics(token, codecId).then((data) => {
-            roomAnalytics = data;
-            res.redirect('/');
-          })
-        });
-        setInterval(() => {
-          console.log("OLD: " + token)
-          refreshToken(returnedToken)
-        }, 86400000); // Toutes les 24h l'access token est m-a-j
-      },
-      code);
 
-  } else if (!integrationIsSet) {
-    res.render('settings', {
-      title: 'First Settings',
-      firstSetting: true
-    });
-  } else {
-    roomAnalytics = await getRoomAnalytics(token, codecId);
-    res.render('index', {
-      title: 'Controller',
-      codecId: codecId,
-      devices: devices,
-      metrics: roomAnalytics,
-      deviceStatus: deviceStatus
+
+/* Session login */
+router.get('/login', (req, res, next) => {
+  return res.render('login.ejs');
+});
+
+router.post('/login', (req, res, next) => {
+  //console.log(req.body);
+  User.findOne({
+    email: req.body.email
+  }, (err, data) => {
+    if (data) {
+      if (data.password == req.body.password) {
+        //console.log("Done Login");
+        req.session.userId = data.unique_id;
+        //console.log(req.session.userId);
+        res.send({
+          "Success": "Success!"
+        });
+      } else {
+        res.send({
+          "Success": "Wrong password!"
+        });
+      }
+    } else {
+      res.send({
+        "Success": "This Email Is not regestered!"
+      });
+    }
+  });
+});
+
+router.get('/logout', (req, res, next) => {
+  console.log("logout")
+  if (req.session) {
+    // delete session object
+    req.session.destroy((err) => {
+      if (err) {
+        return next(err);
+      } else {
+        return res.redirect('/');
+      }
     });
   }
+});
+
+/* GET home page. */
+router.get('/', async function (req, res, next) {
+  isSessionAvailable(req).then(async (bool) => {
+    if (!bool) {
+      res.redirect('/login');
+    } else {
+      const code = req.query.code;
+      if (code != undefined) {
+        console.log("getting token...")
+        getToken(async function (returnedToken) {
+            getDevice(token).then((d) => {
+              devices = d;
+              codecId = d[0].id;
+              integrationIsSet = true;
+              getRoomAnalytics(token, codecId).then((data) => {
+                roomAnalytics = data;
+                res.redirect('/');
+              })
+            });
+            setInterval(() => {
+              console.log("OLD: " + token)
+              refreshToken(returnedToken)
+            }, 86400000); // Toutes les 24h l'access token est m-a-j
+          },
+          code);
+
+      } else if (!integrationIsSet) {
+        res.render('settings', {
+          title: 'First Settings',
+          firstSetting: true
+        });
+      } else {
+        // Check if first item of devices contain product and if codecId is set
+        // If not the user need to re-set the integration
+        if (!devices[0].product | !codecId){
+          res.render('settings', {
+            title: 'First Settings',
+            firstSetting: true
+          });
+        }
+        else{
+          roomAnalytics = await getRoomAnalytics(token, codecId);
+          res.render('index', {
+            title: 'Controller',
+            codecId: codecId,
+            devices: devices,
+            metrics: roomAnalytics,
+            deviceStatus: deviceStatus
+          });
+        }
+      }
+    }
+  });
 });
 
 
@@ -392,33 +456,32 @@ router.get('/zoomForSlider/:strength', async function (req, res, next) {
 
 router.get('/zoomExtremum/:type', async function (req, res, next) {
   const type = req.params.type;
-  if(type != "In" && type != "Out"){
+  if (type != "In" && type != "Out") {
     res.send("Request invalid")
-  }
-  else{
-      var options = {
-        'method': 'POST',
-        'url': 'https://webexapis.com/v1/xapi/command/Camera.Ramp',
-        'headers': {
-          'Authorization': 'Bearer ' + token,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          "deviceId": codecId,
-          "arguments": {
-            "CameraId": 1,
-            "Zoom": type,
-            "ZoomSpeed": 15
-          }
-        })
-    
-      };
-      request(options, function (error, response) {
-        if (error) throw new Error(error);
-        console.log(response.body)
-        console.log(JSON.parse(response.body).deviceId);
-      });
-      res.send("ok")
+  } else {
+    var options = {
+      'method': 'POST',
+      'url': 'https://webexapis.com/v1/xapi/command/Camera.Ramp',
+      'headers': {
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "deviceId": codecId,
+        "arguments": {
+          "CameraId": 1,
+          "Zoom": type,
+          "ZoomSpeed": 15
+        }
+      })
+
+    };
+    request(options, function (error, response) {
+      if (error) throw new Error(error);
+      console.log(response.body)
+      console.log(JSON.parse(response.body).deviceId);
+    });
+    res.send("ok")
   }
 
 });
@@ -627,5 +690,22 @@ function refreshToken(oldRefreshToken) {
     console.log("NEW: " + token)
   });
 
+}
+
+
+function isSessionAvailable(req) {
+  return new Promise(resolve => {
+    User.findOne({
+      unique_id: req.session.userId
+    }, (err, data) => {
+      console.log("data");
+      console.log(data);
+      if (!data) {
+        return resolve(false);
+      } else {
+        return resolve(true);
+      }
+    });
+  });
 }
 module.exports = router;
