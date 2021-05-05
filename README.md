@@ -1,5 +1,3 @@
-# Cam-Control
-
 # Cam-Control 🕹
 
 ## Overview
