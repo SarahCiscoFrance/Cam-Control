@@ -27,6 +27,14 @@ PORT=  //HERE
 
 ### Start the application
 
+Open a terminal and make sure you are in the right directory:
+
+```bash
+cd /Cam-Control
+```
+
+and start the app
+
 ```bash
 npm start
 ```
@@ -45,7 +53,7 @@ spark:xapi_commands
 spark-admin:devices_read
 ```
 
-And for Redirect URI(s) use http://*YOUR_DOMAINE*:*PORT*/ (be sure to replace _YOUR_DOMAINE_ & _PORT_ with the right values).
+And for Redirect URI(s) use http://YOUR_DOMAINE:PORT/ (be sure to replace YOUR_DOMAINE & PORT with the right values).
 
 This information should be user-facing since that's what they'll see in the permission dialog. After successful registration you'll be taken to a different screen containing your integration's newly created Client ID, Client Secret and OAuth Authorization URL.
 The Client Secret will only be shown once so please copy and keep it safe!
