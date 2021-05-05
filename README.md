@@ -40,10 +40,14 @@ Registering an integration with Webex is super easy. Go to https://developer.web
 In the Scopes section be sure to select:
 
 ```bash
-spark:xapi_statuses; spark:xapi_commands; spark-admin:devices_read.
+spark:xapi_statuses
+spark:xapi_commands
+spark-admin:devices_read
 ```
 
-And for Redirect URI(s) use http://YOUR_DOMAINE:PORT/ (be sure to replace YOUR_DOMAINE & PORT with the right values).
+And for Redirect URI(s) use http://*YOUR_DOMAINE*:*PORT*/ (be sure to replace _YOUR_DOMAINE_ & _PORT_ with the right values).
 
 This information should be user-facing since that's what they'll see in the permission dialog. After successful registration you'll be taken to a different screen containing your integration's newly created Client ID, Client Secret and OAuth Authorization URL.
 The Client Secret will only be shown once so please copy and keep it safe!
+
+To finish open the app in a web browser and fill the form.
