@@ -25,12 +25,27 @@ Go to .env file and choose a port number
 PORT=  //HERE
 ```
 
+### Create a self-signed certificate with OpenSSL
+
+First inside the directory "Cam-Control" create a another directory called "certs".
+Then open a terminal and go to the "certs" directory
+
+```bash
+cd cert/
+```
+
+And generate self-signed certificate with OpenSSL :
+
+```bash
+openssl req -x509 -newkey rsa:4096 -keyout selfsigned.key -out selfsigned.crt -days 365
+```
+
 ### Start the application
 
 Open a terminal and make sure you are in the right directory:
 
 ```bash
-cd /Cam-Control
+cd Cam-Control/
 ```
 
 and start the app
