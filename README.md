@@ -31,7 +31,7 @@ First inside the directory "Cam-Control" create a another directory called "cert
 Then open a terminal and go to the "certs" directory
 
 ```bash
-cd cert/
+cd certs/
 ```
 
 And generate self-signed certificate with OpenSSL :
