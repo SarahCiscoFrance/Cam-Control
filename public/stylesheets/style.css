@@ -4,13 +4,10 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: linear-gradient( 
-    135deg
-     , #54eaac 0%, #9e6dec 100%);
+  background: linear-gradient(135deg, #54eaac 0%, #9e6dec 100%);
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
-
 
 #top-container {
   position: absolute;
@@ -72,35 +69,38 @@ a {
   color: #000000;
 }
 
-.text-link{
+.text-link {
   color: white;
 }
 
-h1{
-color: white;
-  font-size: 2.0rem;
+h1 {
+  color: white;
+  font-size: 2rem;
 }
 
 footer {
   margin-top: 5%;
 }
 
-#webexNumber, #codecId{
+#webexNumber,
+#codecId {
   border-radius: 30px;
   height: 25px;
 }
 
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700");
 
 * {
   box-sizing: border-box;
 }
 
-
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
   width: 70%;
+  height: 22rem;
+  caption-side: bottom;
+  margin: 1rem;
 }
 thead {
   background-color: #293649;
@@ -111,7 +111,8 @@ thead th {
   text-align: center;
 }
 
-td, th {
+td,
+th {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
@@ -332,7 +333,6 @@ hr {
   }
 }
 
-
 /**/
 
 .image-hover-text-container {
@@ -352,8 +352,6 @@ hr {
   width: 100%;
 }
 
-
-
 .image-hover-text {
   position: absolute;
   top: 0;
@@ -368,7 +366,6 @@ hr {
 .image-hover-text:hover {
   opacity: 1;
 }
-
 
 .image-hover-text-bubble {
   position: relative;
@@ -390,5 +387,26 @@ hr {
 .image-hover-text .image-hover-text-title {
   font-size: 25px;
   display: block;
-  color: white
+  color: white;
+}
+
+details {
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  padding: 0.5em 0.5em 0;
+}
+
+summary {
+  font-weight: bold;
+  margin: -0.5em -0.5em 0;
+  padding: 0.5em;
+}
+
+details[open] {
+  padding: 0.5em;
+}
+
+details[open] summary {
+  border-bottom: 1px solid #aaa;
+  margin-bottom: 0.5em;
 }

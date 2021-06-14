@@ -10,7 +10,6 @@
   transition: all 0.2s linear;
   border: none;
   cursor: pointer;
-
 }
 
 .button-up:hover,
@@ -38,7 +37,6 @@
   transform: translate3d(0, -10px, 0);
 } */
 
-
 .plus-minus-button {
   background: none;
   color: inherit;
@@ -52,7 +50,6 @@
 
 .plus-minus-button:hover {
   color: gray;
-
 }
 
 .button-left,
@@ -108,4 +105,17 @@
 
 .little-button:hover {
   background: #093344;
+}
+
+.big-button {
+  width: 55px;
+  height: 55px;
+  margin: 3px;
+  background-color: #42c542;
+  border: none;
+  color: white;
+  border-radius: 55px;
+  cursor: pointer;
+  font-size: 1rem;
+  outline: none;
 }

@@ -11,68 +11,92 @@
   <link rel='stylesheet' href='/stylesheets/metrics.css' />
   <link rel='stylesheet' href='/stylesheets/animation.css' />
   <script src="https://kit.fontawesome.com/63191989e5.js" crossorigin="anonymous"></script>
-
   <link rel="stylesheet" href="/stylesheets/rSlider.min.css">
+  <link rel="stylesheet" href="https://code.s4d.io/widget-space/production/main.css">
 </head>
 
 <body>
+  
   <div id="top-container">
     <p>Cam Controller <i class="fas fa-eye"></i></p>
     <a href="/settings"><i class="fas fa-cog nut-icon"></i></a>
     <div id=color-bar></div>
   </div>
-  <a style="text-decoration: none; padding: 1%;" href="/" onclick="LoadData();"><i class="fas fa-redo"></i> RELOAD
-    PAGE</a>
-  <div class="card card__actions" style="border-radius: 30px; margin: 1rem;">
-    <p><b>Device Information: </b></p>
 
-    <!-- https://sts.sci.uwo.ca/img/cisco/webex-board.png -->
-    <%if (devices != undefined && devices.length > 0) {%>
-    <% for (let device of devices) { %>
-    <% if(codecId == device.id) {%>
-    <% if(device.product.includes("Room")) {%>
-    <img style="width: 50%"
-      src="https://images.ctfassets.net/osq47g2esuw5/1MyBDbnUJ9DlMGPVR84kQY/bad4c892c377ccc345d9a2ed9f38cfa4/thumbnail_devices_room_kit_bars.png?w=500">
-    <%}else if (device.product.includes("Board")){ %>
-    <img style="width: 50%" src="https://sts.sci.uwo.ca/img/cisco/webex-board.png">
-    <%} else {%>
-    <img style="width: 50%" src="https://www.webex.com/content/dam/wbx/global/images/devices_3.png">
-    <%}%>
-          <p style="margin-top: 0%"><%= device.displayName%></p>
-    <%}}%>
-    <% if(deviceStatus == "OK") {%>
-    <p>Status: Active <i style="color: #44e444" class="fas fa-circle"></i></p>
-    <% }else{ %>
-    <p>Status: Unactive <i style="color: red" class="fas fa-circle"></i></p>
-    <% } %>
-    <% } %>
+  <div>
+  <div style="display: flex; flex-direction:row">
+    <!--<a style="text-decoration: none; padding: 1%;" href="/" onclick="LoadData();"><i class="fas fa-redo"></i> RELOAD
+      PAGE</a>-->
+    <div class="card card__actions" style="border-radius: 30px; margin: 1rem; width: 35%; padding-top: 0%">
+        <h2 class="camera__price" style="color: white">DEVICE</h2>
+        <form style="display: flex;flex-direction: column;" action="/setCodecId" method="post">
+          <div>
+            <label for="codecId" style="margin-right: 5px; font-weight: bold;">Select a device</label>
+            <select style="margin: 1%" name="codecId" id="codecId">
+              <%if (devices != undefined && devices.length > 0) {%>
+              <% for (let device of devices) { %>
+              <% if(codecId == device.id) {%>
+              <option value="<%=device.id%>" selected> <%=device.displayName%> </option>
+              <%}else {%>
+              <option value="<%=device.id%>"> <%=device.displayName%> </option>
+              <% }}%>
+              <% } %>
+            </select>
+          </div>
+          <div>
+            <input onclick="LoadData();" class="btn" type="submit" value="Choose!">
+          </div>
+        </form>
+      <!-- https://sts.sci.uwo.ca/img/cisco/webex-board.png -->
+      <%if (devices != undefined && devices.length > 0) {%>
+      <% for (let device of devices) { %>
+      <% if(codecId == device.id) {%>
+      <% if(device.product.includes("Room")) {%>
+      <img style="width: 90%"
+        src="https://images.ctfassets.net/osq47g2esuw5/1MyBDbnUJ9DlMGPVR84kQY/bad4c892c377ccc345d9a2ed9f38cfa4/thumbnail_devices_room_kit_bars.png?w=500">
+      <%}else if (device.product.includes("Board")){ %>
+      <img style="width: 50%" src="https://sts.sci.uwo.ca/img/cisco/webex-board.png">
+      <%} else {%>
+      <img style="width: 50%" src="https://www.webex.com/content/dam/wbx/global/images/devices_3.png">
+      <%}%>
+            <p style="margin-top: 0%"><%= device.displayName%></p>
+            <details>
+                <summary>Details &#9432;</summary>
+                <ul style="text-align: left">
+                <li><b>Address :</b> <%=device.ip%> <br></li>
+                <li><b>MAC :</b>  <%=device.mac%> <br></li>
+                <li><b>Product :</b> <%=device.product%> <br></li>
+                <li><b>Serial :</b> <%=device.serial%> <br></li>
+                <li><b>Software :</b>  <%=device.software%> <br></li>
+                </ul>
 
-    <form style="display: flex;flex-direction: column;" action="/setCodecId" method="post">
-      <div>
-        <label for="codecId" style="margin-right: 5px; font-weight: bold;">Choose another device</label>
-        <select style="margin: 1%" name="codecId" id="codecId">
-          <%if (devices != undefined && devices.length > 0) {%>
-          <% for (let device of devices) { %>
-          <% if(codecId == device.id) {%>
-          <option value="<%=device.id%>" selected> <%=device.displayName%> </option>
-          <%}else {%>
-          <option value="<%=device.id%>"> <%=device.displayName%> </option>
-          <% }}%>
-          <% } %>
-        </select>
-      </div>
-      <div>
-        <input onclick="LoadData();" class="btn" type="submit" value="Change!">
-      </div>
-    </form>
-  </div>
-  <hr>
 
-  <p>Control Cisco device's camera</p>
+            </details>
+      <%}}%>
+
+      <% if(deviceStatus == "OK") {%>
+      <p>Status: Active <i style="color: #44e444" class="fas fa-circle"></i></p>
+      <% }else{ %>
+      <p>Status: Unactive <i style="color: red" class="fas fa-circle"></i></p>
+      <% } %>
+      <% } %>
+      <div class="card-line"></div>
+      <form id="callWebexNumber" action="/call" method="POST">
+        <label style="font-weight: bold;">Place Call:</label>
+        <input id="webexNumber" name="webexNumber" type="text" value="" required>
+        <button id="startCallWebex" type="submit" value="startCallWebex" class="little-button"
+          style="background-color: #42c542;"><i class="fas fa-video"></i></button>
+        <button id="endCallWebex" type="submit" value="endCallWebex" class="little-button"
+          style="background-color: #ff0000c9;" hidden><i class="fas fa-video-slash"></i></button>
+      </form>
+
+    </div>
+
+  <!--<p>Control Cisco device's camera</p>-->
 
 
-  <button class="little-button" id="change"><i class="fas fa-exchange-alt"></i></button>
-  <article id="controller-container" class="card camera-little-item">
+  <!--<button class="little-button" id="change"><i class="fas fa-exchange-alt"></i></button>-->
+  <article id="controller-container" class="card camera-little-item" style="display: flex;flex-direction: column;justify-content: center;">
     <header class="card__header">
       <div class="card__content">
         <h2 class="camera__price" style="color: white">CONTROLLER</h2>
@@ -146,8 +170,33 @@
 
 
   </article>
+
+  <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;background-color: #293649;margin: 1%;padding-left: 1%;padding-right: 1%;border-radius: 30px">
+      <h2 class="camera__price" style="color: white">VIDEO FEEDBACK</h2>
+      <div id="video-container"
+        style="position:relative; display: flex;padding: 10px;border-radius: 10px; background: linear-gradient(-30deg, #21897E 0%, #3BA99C 25%, #69D1C5 50%, #7EBCE6 75%, #8980F5 100%);">
+        <video
+          style=" height: 20rem; border: solid; background: #222233; border-bottom-left-radius: 10px; border-top-left-radius: 10px; border-bottom-right-radius: 10px; border-top-right-radius: 10px;color: black"
+          id="remote-view-video" muted autoplay></video>
+        <div
+          style="position: absolute; bottom:0;right:0;width:20%;    margin-right: 2%;
+          margin-bottom: 2%; border-bottom-left-radius: 10px;border-top-left-radius: 10px;border-bottom-right-radius: 10px;border-top-right-radius: 10px;color: black">
+          <audio id="remote-view-audio" autoplay></audio>
+          <video style="width: 100%; border-radius: 5px;" id="self-view" autoplay></video>
+        </div>
+      </div>
+      <form id="videoFeedback" action="/call" method="POST" style="padding:1%">
+        <input id="webexNumber" name="webexNumber" type="text" value="<%= userSip %>" hidden>
+        <button id="startVideoFeedback" type="submit" value="startVideoFeedback" class="big-button"
+          style="background-color: #42c542;">ON</button>
+        <button id="stopVideoFeedback" type="submit" value="stopVideoFeedback" class="big-button"
+          style="background-color: #ff0000c9;" >OFF</button>
+      </form>
+    </div>
+</div>
   <hr>
-  <div style="width: 100%;
+
+  <!--<div style="width: 100%;
   text-align: center;">
     <form id="callWebexNumber" action="/call" method="POST">
       <label style="font-weight: bold;">Call Webex Number:</label>
@@ -157,23 +206,16 @@
       <button id="endCallWebex" type="submit" value="endCallWebex" class="little-button"
         style="background-color: #ff0000c9;" hidden><i class="fas fa-phone-slash"></i></button>
     </form>
-  </div>
+  </div>-->
 
 
-
-
-  <hr>
-
-
-
-  <h2>Metrics</h2>
-
+  <!--<h2>Metrics</h2>-->
+  <div style="display: flex">
   <table>
-    <caption>Last update at <b id="currentTime"></b> the <b id="currentDate"></b></caption>
     <thead>
       <tr>
-        <td colspan="1"><a id="refresh-data" style="text-decoration: none; color: white" href="#"><i
-              class="fas fa-redo"></i> Refresh Data</a></td>
+        <td colspan="1"><a id="refresh-data" class="btn" style="margin-right: 10%" href="#"><i
+              class="fas fa-redo"></i> Refresh Data</a> Last update at <b id="currentTime"></b> the <b id="currentDate"></b></td>
         <th scope="col">Data category</th>
         <th scope="col">Unit</th>
       </tr>
@@ -258,11 +300,11 @@
         <div>
           <div id="PeoplePresenceContainer" class="metric">
             <% if (metrics.roomAnalytics != undefined && metrics.roomAnalytics.PeoplePresence != undefined){ %>
-            <span class="icon "></span>
+            <span class=" "></span>
             <div id="PeoplePresence" class="metric-value"><span><%= metrics.roomAnalytics.PeoplePresence %></span></div>
             <div class="metric-description"><span class="text-nowrap">Occupied</span>
               <%} else {%>
-              <span class="icon icon-error_20 icon-error"></span>
+              <span class=" my-icon-error_20 my-icon-error"></span>
               <div id="PeoplePresence" class="metric-value metric-status-error"><span>-</span></div>
               <div class="metric-description"><span class="text-nowrap">Occupied</span>
                 <%}%>
@@ -273,13 +315,13 @@
           <div>
             <div id="PeopleCountContainer" class="metric">
               <% if (metrics.roomAnalytics != undefined && metrics.roomAnalytics.PeopleCount != undefined){ %>
-                <span class="icon "></span>
+                <span class=" "></span>
                 <div id="PeopleCount" class="metric-value">
                   <span><%= metrics.roomAnalytics.PeopleCount.Current == -1 ? 0 : metrics.roomAnalytics.PeopleCount.Current %></span>
                 </div>
                 <div class="metric-description"><span class="text-nowrap">Occupants</span>
                   <%} else {%>
-                  <span class="icon icon-error_20 icon-error"></span>
+                  <span class=" my-icon-error_20 my-icon-error"></span>
                   <div id="PeopleCount" class="metric-value metric-status-error"><span>-</span></div>
                   <div class="metric-description"><span class="text-nowrap">Occupants</span>
                     <%}%>
@@ -293,7 +335,7 @@
                     <div id="Sound" class="metric-value"><span><%= metrics.roomAnalytics.Sound.Level.A %></span></div>
                     <div class="metric-description"><span class="text-nowrap">Sound Level (dBA)</span>
                       <%} else {%>
-                      <span class="icon icon-error_20 icon-error"></span>
+                      <span class=" my-icon-error_20 my-icon-error"></span>
                       <div id="Sound" class="metric-value metric-status-error"><span>-</span></div>
                       <div class="metric-description"><span class="text-nowrap">Sound Level (dBA)</span>
                         <%}%>
@@ -307,12 +349,12 @@
           <div>
             <div id="AmbientNoiseContainer" class="metric">
               <% if (metrics.roomAnalytics != undefined && metrics.roomAnalytics.AmbientNoise != undefined){ %>
-                        <span class="icon icon-check-circle_20 icon-excellent"></span>
+                        <span class=" my-icon-check-circle_20 my-icon-excellent"></span>
                         <div id="AmbientNoise" class="metric-value metric-status-excellent">
                           <span><%= metrics.roomAnalytics.AmbientNoise.Level.A %></span></div>
                         <div class="metric-description"><span class="text-nowrap">Ambient Noise</span>
                           <%} else {%>
-                          <span class="icon icon-error_20 icon-error"></span>
+                          <span class=" my-icon-error_20 my-icon-error"></span>
                           <div id="AmbientNoise" class="metric-value metric-status-error"><span>-</span></div>
                           <div class="metric-description"><span class="text-nowrap">Ambient Noise</span>
                             <%}%>
@@ -342,15 +384,23 @@
     </div>
   </div>
 
+</div>
+
+</div>
 
 
   <footer>
     <p>© 2021 Cisco. All rights reserved.</p>
   </footer>
 </body>
+<script crossorigin src="https://unpkg.com/webex@^1/umd/webex.min.js"></script>
 <script src="/javascripts/coordinateGride.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+  var guestSip = '<%- userSip %>';
+  var guestAccessToken = '<%- guestAccessToken %>'; // !! DO NOT REMOVE. THIS IS USED BY WEBEXSDK.JS !!
+  console.log("here " +guestSip , guestAccessToken);
+
   function showVal(newVal) {
     console.log(newVal)
     $.ajax({
@@ -430,19 +480,19 @@ $(document).ready(function(){
         if(data == "error"){
           $("#PeoplePresence").html("-");
           $("#PeoplePresence").addClass("metric-status-error");
-          $('span:first',"#PeoplePresenceContainer").removeClass().addClass("icon-error_20 icon-error");
+          $('span:first',"#PeoplePresenceContainer").removeClass().addClass("my-icon-error_20 my-icon-error");
 
           $("#PeopleCount").html("-");
           $("#PeopleCount").addClass("metric-status-error");
-          $('span:first',"#PeopleCountContainer").removeClass().addClass("icon-error_20 icon-error");
+          $('span:first',"#PeopleCountContainer").removeClass().addClass("my-icon-error_20 my-icon-error");
 
           $("#Sound").html("-");
           $("#Sound").addClass("metric-status-error");   
-          $('span:first',"#SoundContainer").find("span").removeClass().addClass("icon icon-error_20 icon-error");
+          $('span:first',"#SoundContainer").find("span").removeClass().addClass("my-icon icon-error_20 my-icon-error");
             
           $("#AmbientNoise").html("-");
           $("#AmbientNoise").removeClass("metric-status-excellent").addClass("metric-status-error")
-          $('span:first',"#AmbientNoiseContainer").removeClass().addClass("icon-error_20 icon-error");
+          $('span:first',"#AmbientNoiseContainer").removeClass().addClass("my-icon-error_20 my-icon-error");
           alert("ERROR: The device is probably off !")
         }
         else{
@@ -463,7 +513,7 @@ $(document).ready(function(){
             
             $("#AmbientNoise").html(data.roomAnalytics.AmbientNoise.Level.A);
             $("#AmbientNoise").removeClass("metric-status-error").addClass("metric-status-excellent");
-            $('span:first',"#AmbientNoiseContainer").removeClass().addClass("icon icon-check-circle_20 icon-excellent");
+            $('span:first',"#AmbientNoiseContainer").removeClass().addClass("my-icon-check-circle_20 my-icon-excellent");
             $("#tdAmbientNoise").text(data.roomAnalytics.AmbientNoise.Level.A);
 
             for (let index = 0; index < data.peripherals.length; index++) {
@@ -731,6 +781,7 @@ $(document).ready(function(){
           });
       }
   });
-</script>
 
+</script>
+<script src="/javascripts/webexSDK.js"></script>
 </html>

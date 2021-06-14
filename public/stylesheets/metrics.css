@@ -1,107 +1,106 @@
-.card-header:first-child, .config-card-header:first-child {
-    border-radius: 5px 5px 0 0;
-    text-align: center;
+.card-header:first-child,
+.config-card-header:first-child {
+  border-radius: 5px 5px 0 0;
+  text-align: center;
 }
 
-.rounded{
-    border-radius: 30px;
+.rounded {
+  border-radius: 30px;
 }
 
 .metric-group {
-    display: flex;
-    align-items: center;
-    flex-grow: 1;
-    justify-content: space-evenly;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  justify-content: space-evenly;
 }
 
 .metric {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-left: 0.25rem;
-    margin-right: 0.25rem;
-    min-width: 8rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+  min-width: 8rem;
 }
 
 .metric .metric-value {
-    justify-content: center;
-    align-items: center;
-    border-radius: 100%;
-    text-align: center;
-    display: flex;
-    height: 5rem;
-    width: 5rem;
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
-    border: 2px solid #00A0D1;
-    color: white;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  text-align: center;
+  display: flex;
+  height: 5rem;
+  width: 5rem;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  border: 2px solid #00a0d1;
+  color: white;
 }
 
 .metric .metric-description {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .card-line {
-    height: 0.5px;
-    margin: 15px;
-    background-color: #EDEDED;
+  height: 0.5px;
+  margin: 15px;
+  background-color: #ededed;
 }
 
 .metric .metric-status-error {
-    border: 2px solid #F7644A !important;
+  border: 2px solid #f7644a !important;
 }
 
 .metric .metric-status-excellent {
-    border: 2px solid #00AB50 !important;
+  border: 2px solid #00ab50 !important;
 }
 
-.metric .icon-excellent {
-    position: absolute;
-    border-radius: 30px;
-    top: 6px;
-    right: 10px;
-    height: 15px;
-    width: 35px;
-    /* background: #fff; */
-    background: #293649;
-    color: #00AB50;
-    padding-left: 2px;
+.metric .my-icon-excellent {
+  position: absolute;
+  border-radius: 30px;
+  top: 6px;
+  right: 10px;
+  /*height: 15px;*/
+  width: 35px;
+  /* background: #fff; */
+  background: #293649;
+  color: #00ab50;
+  padding-left: 2px;
 }
 
-.icon-check-circle_20::before {
-    font-family: "Font Awesome 5 Free";
-    content: "\f058";
+.my-icon-check-circle_20::before {
+  font-family: "Font Awesome 5 Free";
+  content: "\f058";
 }
 
-
-.metric .icon-error {
-    position: absolute;
-    top: 6px;
-    border-radius: 30px;
-    right: 10px;
-    height: 15px;
-    width: 35px;
-    /* background: #fff; */
-    background: #293649;
-    color: #F7644A;
-    padding-left: 2px;
+.metric .my-icon-error {
+  position: absolute;
+  top: 6px;
+  border-radius: 30px;
+  right: 10px;
+  /*height: 15px;*/
+  width: 35px;
+  /* background: #fff; */
+  background: #293649;
+  color: #f7644a;
+  padding-left: 2px;
 }
 
-.icon-error_20::before {
-    font-family: "Font Awesome 5 Free";
-    content: "\f057";
+.my-icon-error_20::before {
+  font-family: "Font Awesome 5 Free";
+  content: "\f057";
 }
 
 @media screen and (min-width: 200px) and (max-width: 640px) {
-
-    .metric-group {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        flex-grow: 1;
-        white-space: pre-line;
-    }
+  .metric-group {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex-grow: 1;
+    white-space: pre-line;
+  }
 }
