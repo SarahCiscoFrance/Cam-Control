@@ -27,7 +27,7 @@ After creating a Guest Issuer application, the secret will only be shown once. K
 
 ### Set PORT number, Guest Issuer ID, Shared Secret
 
-Go to .env file, choose a port number and set enter the Guest Issuer ID and the Secret (which have just been created):
+Go to .env file, choose a port number and enter the Guest Issuer ID and the Secret (which have just been created):
 
 ```bash
 PORT=  //HERE
