@@ -3,8 +3,9 @@
 ## Overview
 
 Control the camera of a Webex video endpoint.
-
-<img src="https://raw.githubusercontent.com/SarahCiscoFrance/Cam-Control/master/visual.png" width="500">
+<p align="center">
+  <img src="https://raw.githubusercontent.com/SarahCiscoFrance/Cam-Control/main/visual.png" width="1000">
+</p>
 
 This application use the Webex API to get the list of the Cloud registered devices and also to send camera control request directly to these devices.
 In order to use this app you will need an integration (we will see this point later in the installation part).
