@@ -17,12 +17,20 @@ In order to use this app you will need an integration (we will see this point la
 git clone https://github.com/SarahCiscoFrance/Cam-Control.git
 ```
 
-### Change PORT number
+### Create a New Guest Issuer
+
+Go to https://developer.webex.com/my-apps/new/guest-issuer and follow the process. This application type will provide you with a Guest Issuer ID and a Secret. These two parameters will be used to generate guest tokens. Only paid Webex subscribers may create Guest Issuer applications.
+
+After creating a Guest Issuer application, the secret will only be shown once. Keep this shared secret safe, as you would with any other sensitive piece of information such as a password. If you need to regenerate the secret for any reason, the prior secret will be immediately invalidated.
+
+### Set PORT number, Guest Issuer ID, Shared Secret
 
 Go to .env file and choose a port number
 
 ```bash
 PORT=  //HERE
+Guest_Issuer_ID=
+Shared_Secret=
 ```
 
 ### Create a self-signed certificate with OpenSSL

@@ -682,16 +682,13 @@ function getJwtToken() {
     var payload = {
       sub: "guest-user-" + date,
       name: name,
-      iss:
-        "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9iMDUyMjZmZi1iM2NhLTQ4ZmQtYjRlOC0zNTNhNTc3NGU5MWQ"
+      iss: process.env.Guest_Issuer_ID
     };
 
     resolve(
-      jwt.sign(
-        payload,
-        Buffer.from("kE+rThpdLiKqaCzK6T/lTUJDZIY6Jyueb8JbHoTGvlg=", "base64"),
-        { expiresIn: "14h" }
-      )
+      jwt.sign(payload, Buffer.from(process.env.Shared_Secret, "base64"), {
+        expiresIn: "14h"
+      })
     );
   });
 }
