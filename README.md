@@ -3,6 +3,7 @@
 ## Overview
 
 Control the camera of a Webex video endpoint.
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/SarahCiscoFrance/Cam-Control/main/visual.png" width="1000">
 </p>
@@ -26,7 +27,7 @@ After creating a Guest Issuer application, the secret will only be shown once. K
 
 ### Set PORT number, Guest Issuer ID, Shared Secret
 
-Go to .env file and choose a port number
+Go to .env file, choose a port number and set enter the Guest Issuer ID and the Secret (which have just been created):
 
 ```bash
 PORT=  //HERE
