@@ -30,7 +30,7 @@ After creating a Guest Issuer application, the secret will only be shown once. K
 Go to .env file, choose a port number and enter the Guest Issuer ID and the Secret (which have just been created):
 
 ```bash
-PORT=  //HERE
+PORT=
 Guest_Issuer_ID=
 Shared_Secret=
 ```
@@ -78,7 +78,7 @@ spark:xapi_commands
 spark-admin:devices_read
 ```
 
-And for Redirect URI(s) use http://YOUR_DOMAINE:PORT/ (be sure to replace YOUR_DOMAINE & PORT with the right values).
+And for Redirect URI(s) use https://HOSTNAME:PORT/ (be sure to replace HOSTNAME & PORT with the right values).
 
 This information should be user-facing since that's what they'll see in the permission dialog. After successful registration you'll be taken to a different screen containing your integration's newly created Client ID, Client Secret and OAuth Authorization URL.
 The Client Secret will only be shown once so please copy and keep it safe!
