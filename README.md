@@ -11,6 +11,26 @@ Control the camera of a Webex video endpoint.
 This application use the Webex API to get the list of the Cloud registered devices and also to send camera control request directly to these devices.
 In order to use this app you will need an integration (we will see this point later in the installation part).
 
+## Requirements ⚠️
+
++ **Node.js** installed
++ **Openssl** installed
++ **mongoDB** installed
+
+When mongoDB is installed, create a db called "control-cam" and add a new collection "users" to this db. Then add a document to this collection to define your first account. exemple : 
+
+```bash
+{
+    "_id" : ObjectId("60463838066a27ac413621f1"),
+    "unique_id" : 1,
+    "email" : "john.doe@email.com",
+    "username" : "myusername",
+    "password" : "mypassword",
+    "passwordConf" : "mypassword",
+    "__v" : 0
+}
+```
+
 ## Installation 🔨
 
 ### Clone project
@@ -37,17 +57,16 @@ Shared_Secret=
 
 ### Create a self-signed certificate with OpenSSL
 
-First inside the directory "Cam-Control" create a another directory called "certs".
-Then open a terminal and go to the "certs" directory
+First open a terminal inside the directory "Cam-Control" and create a another directory called "certs".
 
 ```bash
-cd certs/
+mkdir certs/
 ```
 
 And generate self-signed certificate with OpenSSL :
 
 ```bash
-openssl req -x509 -newkey rsa:4096 -keyout selfsigned.key -out selfsigned.crt -days 365
+openssl req -x509 -nodes -subj '/CN=localhost' -newkey rsa:4096 -keyout ./certs/selfsigned.key -out ./certs/selfsigned.crt -days 999
 ```
 
 ### Start the application
@@ -56,6 +75,11 @@ Open a terminal and make sure you are in the right directory:
 
 ```bash
 cd Cam-Control/
+```
+
+install dependencies
+```bash
+npm install
 ```
 
 and start the app
